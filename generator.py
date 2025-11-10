@@ -1,26 +1,27 @@
 import torch
+latent_dim=128
 class GeneraterBlock(torch.nn.Module):
     def __init__(self, in_dim, out_dim, kernel, stride):
         super().__init__()
-        self.transconv = torch.nn.ConvTranspose3d(in_dim, out_dim, kernel, stride)
+        self.trc = torch.nn.ConvTranspose3d(in_dim, out_dim, kernel, stride)
         self.batchnorm = torch.nn.BatchNorm3d(out_dim)
     
     def forward(self, x):
-        x = self.transconv(x)
+        x = self.trc(x)
         x = self.batchnorm(x)
         return torch.nn.functional.relu(x)
 class Generator(torch.nn.Module):   
     def __init__(self):
         super().__init__()
-        self.transconv0 = GeneraterBlock(latent_dim, 256, (4, 1, 1), (4, 1, 1))
-        self.transconv1 = GeneraterBlock(256, 128, (1, 4, 1), (1, 4, 1))
-        self.transconv2 = GeneraterBlock(128, 64, (1, 1, 4), (1, 1, 4))
-        self.transconv3 = GeneraterBlock(64, 32, (1, 1, 3), (1, 1, 1))
-        self.transconv4 = torch.nn.ModuleList([
+        self.trc0 = GeneraterBlock(latent_dim, 256, (4, 1, 1), (4, 1, 1))
+        self.trc1 = GeneraterBlock(256, 128, (1, 4, 1), (1, 4, 1))
+        self.trc2 = GeneraterBlock(128, 64, (1, 1, 4), (1, 1, 4))
+        self.trc3 = GeneraterBlock(64, 32, (1, 1, 3), (1, 1, 1))
+        self.trc4 = torch.nn.ModuleList([
             GeneraterBlock(32, 16, (1, 4, 1), (1, 4, 1))
             for _ in range(n_tracks)
         ])
-        self.transconv5 = torch.nn.ModuleList([
+        self.trc5 = torch.nn.ModuleList([
             GeneraterBlock(16, 1, (1, 1, 12), (1, 1, 12))
             for _ in range(n_tracks)
         ])
