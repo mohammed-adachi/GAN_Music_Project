@@ -5,9 +5,6 @@ import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-# ==============================================================================
-# 1. CONFIGURATION (Inchangée)
-# ==============================================================================
 
 SAVE_DIR = "bitmidi_dataset"
 BASE_URL = "https://bitmidi.com"
@@ -17,9 +14,6 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
 
-# ==============================================================================
-# 2. LE SCRIPT DE SCRAPING (MIS À JOUR)
-# ==============================================================================
 
 def scrape_bitmidi():
     print("🚀 Démarrage du scraping de bitmidi.com...")
