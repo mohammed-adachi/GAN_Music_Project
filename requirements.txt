@@ -1,0 +1,12 @@
+pypianoroll
+gdown
+numpy
+scipy
+torch
+matplotlib
+tqdm
+livelossplot
+gdown
+requests
+beautifulsoup4
+pretty_midi
